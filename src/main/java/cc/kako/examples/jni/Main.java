@@ -10,9 +10,17 @@ package cc.kako.examples.jni;
  * @author yalda
  */
 public class Main {
-    public static void main(final String[] args) {
-        System.out.println("Hello");
+    private static final String SO_PATH = "/tmp/libExample.so";
+
+    static {
+        System.load(SO_PATH);
     }
-    
+
+    public static void main(final String[] args) {
+        System.out.println("Hello World from Java");
+        
+        new Main().nativePrint();
+    }
+
     private native void nativePrint();
 }
