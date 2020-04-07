@@ -5,8 +5,6 @@
  */
 package cc.kako.examples.jni;
 
-import java.io.IOException;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -125,11 +123,10 @@ public class MainSceneController {
     @FXML
     private void onNativeArraySumPressed() {
         String nText = this.nativeArraySumN.getText();
-        String threadCountText = this.nativeArraySumThreadCount.getText();
+        // String threadCountText = this.nativeArraySumThreadCount.getText();
         
         int n = Util.tryParseInt(nText).orElse(1);
-        int threadCount = Util.tryParseInt(threadCountText).orElse(1);
-        
+
         int[] values = new int[n];
         for (int i = 0; i < n; i++) {
             values[i] = i;
