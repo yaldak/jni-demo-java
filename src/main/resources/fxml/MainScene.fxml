@@ -163,7 +163,7 @@
                         <Separator layoutX="45.0" layoutY="193.0" prefHeight="2.0" prefWidth="703.0" />
                         <Label layoutX="41.0" layoutY="225.0" prefHeight="17.0" prefWidth="95.0" text="Array Sum 1-n" />
                         <Label layoutX="42.0" layoutY="244.0" text="(Parallel)" />
-                        <TextField fx:id="nativeArraySumN" layoutX="239.0" layoutY="220.0" prefHeight="27.0" prefWidth="50.0" text="10" />
+                        <TextField disable="true" editable="false" layoutX="239.0" layoutY="220.0" prefHeight="27.0" prefWidth="50.0" text="10" />
                         <Button layoutX="364.0" layoutY="215.0" mnemonicParsing="false" onAction="#onNativeArraySumPressed" text="Call Native" />
                         <Label layoutX="364.0" layoutY="257.0" text="Native performance:">
                            <font>

@@ -1,8 +1,8 @@
 package cc.kako.examples.jni;
 
 public class NativeSampler {
-    // TODO: Make this better
-    private static final String SO_PATH = "/tmp/libExample.so";
+    // XXX: This is Mac specific.
+    private static final String SO_PATH = "/tmp/libNativeSampler.dylib";
 
     static {
         System.load(SO_PATH);
@@ -21,7 +21,7 @@ public class NativeSampler {
     public static native Integer nativeIntegerObject();
     
     public static native String nativeRotateString(String input);
-    public static native int nativeArraySumParallel(int[] values);
+    public static native int nativeArraySumParallel();
     public static native void nativeOpenGLTriangle();
     public static native void nativeRaiseException();
 }

@@ -39,9 +39,6 @@ public class MainSceneController {
     @FXML
     private Label nativeArraySumResultLabel;
     
-    @FXML
-    private TextField nativeArraySumN;
-    
     /* Performance Metrics */
     @FXML
     private TextField metricsStringTextField;
@@ -119,17 +116,8 @@ public class MainSceneController {
     
     @FXML
     private void onNativeArraySumPressed() {
-        String nText = this.nativeArraySumN.getText();
-
-        int n = Util.tryParseInt(nText).orElse(1);
-
-        int[] values = new int[n];
-        for (int i = 0; i < n; i++) {
-            values[i] = i;
-        }
-        
         Instant start = Instant.now();
-        int result = NativeSampler.nativeArraySumParallel(values);
+        int result = NativeSampler.nativeArraySumParallel();
         Instant stop = Instant.now();
         
         this.nativeArraySumResultLabel.setText(String.valueOf(result));
