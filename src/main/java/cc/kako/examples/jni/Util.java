@@ -25,11 +25,23 @@ public class Util {
     public static String formatNanoDuration(final Instant from, final Instant to) {
         return String.format("%d ns", Duration.between(from, to).toNanos());
     }
+    
+    public static long calculateNanoDuration(final Instant from, final Instant to) {
+        return Duration.between(from, to).toNanos();
+    }
 
     public static String rotateString(final String s) {
-        //int i = 0 % s.length();
-        //return s.substring(i) + s.substring(0, i);
-        // XXX: THIS IS BROKEN
-        return "FIXME";
+        /** Strings are immutable in Java, this is not an exact replica of the C form */
+        StringBuilder sb = new StringBuilder();
+        int len = s.length();
+        char c;
+        int i;
+
+        for (i = len - 1; i >= 0; i--) {
+            c = s.charAt(i);
+            sb.append(c);
+        }
+
+        return sb.toString();
     }
 }

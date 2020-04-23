@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -40,8 +42,12 @@ public class MainSceneController {
     @FXML
     private TextField nativeArraySumN;
     
+    /* Performance Metrics */
     @FXML
-    private TextField nativeArraySumThreadCount;
+    private TextField metricsStringTextField;
+    
+    @FXML
+    private LineChart<Number, Number> metricsBarChart;
     
     @FXML
     public void initialize() {
@@ -114,8 +120,7 @@ public class MainSceneController {
     @FXML
     private void onNativeArraySumPressed() {
         String nText = this.nativeArraySumN.getText();
-        // String threadCountText = this.nativeArraySumThreadCount.getText();
-        
+
         int n = Util.tryParseInt(nText).orElse(1);
 
         int[] values = new int[n];
@@ -134,5 +139,36 @@ public class MainSceneController {
     @FXML
     private void onNativeExceptionPressed() {
         NativeSampler.nativeRaiseException();
+    }
+    
+    @FXML
+    private void onSpeedTestPressed() {
+        String input = this.metricsStringTextField.getText();
+        
+        metricsBarChart.getData().clear();
+        
+        XYChart.Series<Number, Number> nativeSeries = new XYChart.Series<>();
+        nativeSeries.setName("Native");
+        for (int i = 0; i < 100; i++) {
+            Instant start = Instant.now();
+            String result = NativeSampler.nativeRotateString(input);
+            Instant stop = Instant.now();
+            
+            nativeSeries.getData().add(new XYChart.Data<>(i, 
+                    Util.calculateNanoDuration(start, stop)));
+        }
+        metricsBarChart.getData().add(nativeSeries);
+        
+        XYChart.Series<Number, Number> javaSeries = new XYChart.Series<>();
+        javaSeries.setName("Java");
+        for (int i = 0; i < 100; i++) {
+            Instant start = Instant.now();
+            String result = Util.rotateString(input);
+            Instant stop = Instant.now();
+            
+            javaSeries.getData().add(new XYChart.Data<>(i, 
+                    Util.calculateNanoDuration(start, stop)));
+        }
+        metricsBarChart.getData().add(javaSeries);
     }
 }
